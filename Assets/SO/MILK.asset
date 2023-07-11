@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 962c39fb6131a9e43b385e8db1d1b463, type: 3}
+  m_Name: MILK
+  m_EditorClassIdentifier: 
+  allletters: {fileID: 11400000, guid: 7ebc1468dc1fc984ab2b4c88ec076230, type: 2}
+  consistLetters:
+  - {fileID: 11400000, guid: 4ab14289374286240be66d8e0d87fb65, type: 2}
+  - {fileID: 11400000, guid: 6dc163fc820711c4fb372d62eeace486, type: 2}
+  - {fileID: 11400000, guid: 683e1509c23124b4ebb7c4fd747906d9, type: 2}
+  - {fileID: 11400000, guid: 82b3aee0adb4d50429ef172a93a4fd40, type: 2}
+  missingLetters:
+  - {fileID: 11400000, guid: 6dc163fc820711c4fb372d62eeace486, type: 2}
+  sentence: Cows Give Us Milk.
+  level: 0
+  scoreamount: 5
+  wrongLetters:
+  - {fileID: 11400000, guid: 83e4ed13ca404464ca2227917e23287e, type: 2}
+  - {fileID: 11400000, guid: a7c9182c0095bca4a88bbd527bb20815, type: 2}
+  - {fileID: 11400000, guid: 61cab172e7c8b0c44bb4c96ef186b0a4, type: 2}
+  - {fileID: 11400000, guid: 47a03d44c84a3224db38922356ccb0cc, type: 2}
+  - {fileID: 11400000, guid: a39b64dd279d1b74a9f8b70c06fef758, type: 2}
+  - {fileID: 11400000, guid: a33b8cf1d4f02e445a227c953843ab15, type: 2}
+  - {fileID: 11400000, guid: b423c1f4f0d29a24eb871a4981e7882a, type: 2}
+  - {fileID: 11400000, guid: b8da0060511001347b9e42bee1e94cf3, type: 2}
+  - {fileID: 11400000, guid: 968a10c2611ee2a44a9586ce317ffc46, type: 2}
+  - {fileID: 11400000, guid: 82b3aee0adb4d50429ef172a93a4fd40, type: 2}
+  - {fileID: 11400000, guid: 683e1509c23124b4ebb7c4fd747906d9, type: 2}
+  - {fileID: 11400000, guid: 4ab14289374286240be66d8e0d87fb65, type: 2}
+  - {fileID: 11400000, guid: 6afb3af6febc8b24d820dba5fac02712, type: 2}
+  - {fileID: 11400000, guid: a30b991eac22f604c8a4eaf0c50c62ab, type: 2}
+  - {fileID: 11400000, guid: 7e7eda66c0bedf34ba09c04920948fcd, type: 2}
+  - {fileID: 11400000, guid: 8c84e6e238b356546b9ecb6e100548cb, type: 2}
+  - {fileID: 11400000, guid: 26f16586ad3c4d84eb620939dbf0e462, type: 2}
+  - {fileID: 11400000, guid: 43acd16ddccbc7a4bac8f2bfdffe933d, type: 2}
+  - {fileID: 11400000, guid: d3cfd106b13a5aa4eb4c831c30e0bed3, type: 2}
+  - {fileID: 11400000, guid: dc03ee2ff0abf93459b7946dd4447d3f, type: 2}
+  - {fileID: 11400000, guid: 4c03f1d48dda7a445ae9c2f1c1d2dd8c, type: 2}
+  - {fileID: 11400000, guid: 27d9f62c0de342440bb10f6f3c0fafdd, type: 2}
+  - {fileID: 11400000, guid: 3207bb42c89fb4744b604adda49d6969, type: 2}
+  - {fileID: 11400000, guid: 3749161c423ef1b469a3d0e3b5706ac2, type: 2}
+  - {fileID: 11400000, guid: 3948013106386264691a1de53a006da3, type: 2}
+  missingletterspawnChance: 0.701
+  questionLetter: {fileID: 11400000, guid: 0f167b19a9c9123409c35f9decbe5578, type: 2}
