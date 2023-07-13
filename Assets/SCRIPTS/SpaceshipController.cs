@@ -19,12 +19,11 @@ public class SpaceshipController : MonoBehaviour
    [SerializeField] private float floorBound;
    private void FixedUpdate()
     {
+            Fire();
         if(Input.anyKey)
         {
            Move();
-            Fire();
         }
-
         if (!IsFireReady())
             UpdateFireDelay();
      
@@ -54,11 +53,14 @@ public class SpaceshipController : MonoBehaviour
     
     private void Fire()
     {
-            if (Input.GetButton("Fire1") && IsFireReady())
+            if (Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0))
             {
-                 transform.rotation = SetTargetAngle();
-                BulletPool.Instance.InstantiateBullet(targetAngle);
-                currentfireDelay = fireDelay;
+                if (IsFireReady())
+                {
+                    transform.rotation = SetTargetAngle();
+                    BulletPool.Instance.InstantiateBullet(targetAngle);
+                    currentfireDelay = fireDelay;
+                }
             }
     }
 
