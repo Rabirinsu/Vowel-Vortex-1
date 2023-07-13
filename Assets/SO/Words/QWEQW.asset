@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 962c39fb6131a9e43b385e8db1d1b463, type: 3}
-  m_Name: MILK
+  m_Name: QWEQW
   m_EditorClassIdentifier: 
   allletters: {fileID: 11400000, guid: 7ebc1468dc1fc984ab2b4c88ec076230, type: 2}
   consistLetters:
@@ -49,5 +49,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3207bb42c89fb4744b604adda49d6969, type: 2}
   - {fileID: 11400000, guid: 3749161c423ef1b469a3d0e3b5706ac2, type: 2}
   - {fileID: 11400000, guid: 3948013106386264691a1de53a006da3, type: 2}
-  missingletterspawnChance: 0.701
+  missingletterspawnChance: 0.88
   questionLetter: {fileID: 11400000, guid: 0f167b19a9c9123409c35f9decbe5578, type: 2}

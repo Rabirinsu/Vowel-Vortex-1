@@ -151,3 +151,7 @@ MonoBehaviour:
   letter: {fileID: 11400000, guid: 4ab14289374286240be66d8e0d87fb65, type: 2}
   rb: {fileID: 877938341501961791}
   currentType: 0
+  wrongScore: {fileID: 6990396402207886330, guid: 613040259d4518b40a25b3e29dc9b680, type: 3}
+  rightScore: {fileID: 6990396402207886330, guid: 40fec0eb5481a6e48815c7169067813f, type: 3}
+  col: {fileID: 877938341501961788}
+  destroyDelay: 2

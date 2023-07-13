@@ -28,8 +28,14 @@ public class SpawnManager : MonoBehaviour
 
     public void ThrowLetters()
     {
+        Stop();
         nextLetter = GameManager.Instance.currentWord.GetLetter();
-        InvokeRepeating("Spawn", 2, GenerateRandomValue());
+        InvokeRepeating("Spawn", 1, GenerateRandomValue());
+    }
+
+    public void Stop()
+    {
+        CancelInvoke();
     }
     
     private void Spawn()

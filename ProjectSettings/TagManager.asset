@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Letter
   - Bullet
+  - ScoreAnchor
   layers:
   - Default
   - TransparentFX
