@@ -9,10 +9,16 @@ using UnityEngine.Serialization;
 
 public class UIManager : MonoBehaviour
 {
+    [Header("TEXT MESH")]
       [SerializeField] private TextMeshProUGUI scoreTmp;
-      [SerializeField] private Image succesBar;
+      [SerializeField] private TextMeshProUGUI currentscoreTmp;
+      [SerializeField] private TextMeshProUGUI bestscoreTmp;
       private float barcurrentFillamount;
+      [Header("CORE")]
+      [SerializeField] private Image succesBar;
       [SerializeField] private GameObject gameoverCanvas;
+      [SerializeField] private GameObject gamesuccessCanvas;
+      [SerializeField] private GameObject scoreTable;
       [SerializeField] private float uitweenDelay;
        [SerializeField] private float rightbarfillAmount;
        [SerializeField] private float wrongbarfillAmount;
@@ -20,7 +26,9 @@ public class UIManager : MonoBehaviour
       [SerializeField] private Color wrongColor;
       [SerializeField] private Color defaultColor;
       [SerializeField] private List<Button> lifes;
+      [Header("EVENTS")]
      [SerializeField] private GameEvent gameoverEvent;
+     [SerializeField] private GameEvent gamesuccessEvent;
       private void OnEnable()
       {
           Reset();
@@ -43,13 +51,33 @@ public class UIManager : MonoBehaviour
       }
       private void NormalizeBar()
       {
-          if (barcurrentFillamount > 1)
+          if (barcurrentFillamount >= 1)
+          {
               barcurrentFillamount = 1;
+              gamesuccessEvent?.Raise();
+          }
           else if (barcurrentFillamount < 0)
               barcurrentFillamount = 0;
       }
       public void Reset()
       {
+          GameManager.Instance.currentScore = 0;
+          gameoverCanvas.SetActive(false);
+          gamesuccessCanvas.SetActive(false);
+          scoreTable.SetActive(false);
+          barcurrentFillamount = 0f;
+          UpdateSuccesBar(0f,defaultColor);
+          UpdateScore(0);
+          foreach (var life in lifes)
+          {
+              life.interactable = true;
+          }
+      }
+     public void LevelUp()
+      {
+          gameoverCanvas.SetActive(false);
+          gamesuccessCanvas.SetActive(false);
+          scoreTable.SetActive(false);
           barcurrentFillamount = 0f;
           UpdateSuccesBar(0f,defaultColor);
           foreach (var life in lifes)
@@ -60,8 +88,10 @@ public class UIManager : MonoBehaviour
 
       public void GameOver()
       {
-          gameoverCanvas.SetActive(true);
+          currentscoreTmp.text =  GameManager.Instance.currentScore.ToString();
+          bestscoreTmp.text =  GameManager.Instance.bestScore.ToString();
       }
+      
       public void UpdateScore(int scoreAmount)
       {
           var beforescore = GameManager.Instance.currentScore - scoreAmount;

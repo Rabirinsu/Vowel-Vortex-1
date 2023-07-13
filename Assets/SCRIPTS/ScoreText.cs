@@ -1,4 +1,5 @@
 
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -23,15 +24,9 @@ public class ScoreText : MonoBehaviour
         });
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void LateUpdate()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if(GameManager.Instance.currentPhase == GameManager.Phase.Over)
+            Destroy(this.gameObject);
     }
 }

@@ -22,7 +22,6 @@ public class Bullet : MonoBehaviour
 
       public void Fire(Vector2 targetAngle)
       {
-            Debug.Log("Bullet fired " + targetAngle);
             rb.AddForce(targetAngle * forcePower , ForceMode2D.Impulse);
       }
 

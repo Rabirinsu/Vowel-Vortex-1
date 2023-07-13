@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public int currentScore;
+    public int bestScore;
     private float initializegameDelay;
     [SerializeField] private GameData data;
     [FormerlySerializedAs("initializegame_event")]
@@ -26,7 +27,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform wordplacementstartPoint;
       private Vector2 wordplacePoint;
     [SerializeField] float wordplaceoffsetX;
-    private List<Letter> wordLetters;
+    [SerializeField] private List<Letter> wordLetters;
     private string sentence;
     [SerializeField] private TextMeshProUGUI sentenceTMP;
     [SerializeField] private List<GameObject> placedWords;
@@ -47,6 +48,21 @@ public class GameManager : MonoBehaviour
     {
         Define();
     }
+
+    public void UpdateBestScore()
+    {
+        if (currentScore > data.bestScore)
+        {
+            data.bestScore = currentScore;
+            SetBesTScore();
+        }
+    }
+
+    public void SetBesTScore()
+    {
+        bestScore = data.bestScore;
+    }
+    
     // ReSharper disable once Unity.NoNullPropagation
     private void UpdatePhase()
     {
@@ -83,7 +99,7 @@ public class GameManager : MonoBehaviour
     public void StopGame()
     {
         Time.timeScale = 0;
-        currentPhase = Phase.None;
+        currentPhase = Phase.Over;
         UnplaceWord();
         wordLetters.Clear();
     }
@@ -91,6 +107,13 @@ public class GameManager : MonoBehaviour
     public void  RestartGame()
     {
         currentScore = 0;
+        Time.timeScale = 1;
+        sentenceTMP.text = "";
+        placedWords.Clear();
+        currentPhase = Phase.Initialize;
+    }   
+    public void LevelUp()
+    {
         Time.timeScale = 1;
         sentenceTMP.text = "";
         placedWords.Clear();
@@ -119,32 +142,30 @@ public class GameManager : MonoBehaviour
     
     private IEnumerator GameInitializer()
     {
+        UnplaceWord();
         sentence = currentWord.sentence;
         wordplacePoint = wordplacementstartPoint.position;
         PlaceSentence();
         StartCoroutine(PlaceWord());
         yield return new WaitForSeconds(initializegameDelay);
         currentPhase = Phase.Start;
-       
     }
     private void SetWord()
     {
-        wordLetters = currentWord.GetWordLetters();
+         wordLetters = currentWord.GetWordLetters();
          currentWord.Initialize();
     } 
 
     IEnumerator PlaceWord()
     {
-        Debug.Log("Function Called Times");
         for(var i =0; i < wordLetters.Count ; i++)
-        {
+        {     
             var letterprefab = Instantiate(wordLetters[i].prefab, letterspawnPoint.position, Quaternion.identity);
             placedWords.Add(letterprefab);
             letterprefab.GetComponent<LetterDefinition>().PlaceLetter(wordLetters[i], wordplacePoint);
             letterprefab.transform.DOMove(wordplacePoint, 2f);
-            yield return new WaitForSeconds(1.2f);
             wordplacePoint += new Vector2( wordplaceoffsetX, 0);
-
+            yield return new WaitForSeconds(1.2f);
         }
     }
 

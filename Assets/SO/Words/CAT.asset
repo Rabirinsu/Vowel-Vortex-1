@@ -47,5 +47,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3207bb42c89fb4744b604adda49d6969, type: 2}
   - {fileID: 11400000, guid: 3749161c423ef1b469a3d0e3b5706ac2, type: 2}
   - {fileID: 11400000, guid: 3948013106386264691a1de53a006da3, type: 2}
-  missingletterspawnChance: 0.16
+  missingletterspawnChance: 0.159
   questionLetter: {fileID: 11400000, guid: 0f167b19a9c9123409c35f9decbe5578, type: 2}
