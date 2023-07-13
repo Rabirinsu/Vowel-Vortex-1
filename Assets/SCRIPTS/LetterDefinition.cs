@@ -37,12 +37,14 @@ public class LetterDefinition : MonoBehaviour
            // Got Score
            // Go To Word .. Point
            currentType = Type.missing;
+           col.isTrigger = false;
            Destroy(this.gameObject, lifeTime);
        }
        else
        {
            // Go player to explode
            currentType = Type.wrong;    
+           col.isTrigger = false;
            Destroy(this.gameObject, lifeTime);
        }
     }

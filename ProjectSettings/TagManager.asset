@@ -7,6 +7,7 @@ TagManager:
   - Letter
   - Bullet
   - ScoreAnchor
+  - Obstacle
   layers:
   - Default
   - TransparentFX

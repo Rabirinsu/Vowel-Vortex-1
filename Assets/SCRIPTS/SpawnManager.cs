@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SpawnManager : MonoBehaviour
 {
     public static SpawnManager instance;
+    [SerializeField] private GameObject obstacle;
+    [SerializeField] private float obstaclespawnDelay;
+    [SerializeField] private float spawnpointX;
+    [SerializeField] private float spawnpointY;
     [SerializeField] private float minspawnDelay;     
     [SerializeField] private float maxspawnDelay;     
     [SerializeField] private Animator animator;
@@ -19,8 +25,14 @@ public class SpawnManager : MonoBehaviour
         {
             instance = this;
         }
-     
+        InvokeRepeating("SpawnObstacles", 1, obstaclespawnDelay);
     }
+
+    private void SpawnObstacles()
+    {
+        Instantiate(obstacle, new Vector2(Random.Range(-spawnpointX,spawnpointX), spawnpointY), quaternion.identity);
+    }
+    
     private float GenerateRandomValue()
     {
         return Random.Range(minspawnDelay, maxspawnDelay);
@@ -35,7 +47,7 @@ public class SpawnManager : MonoBehaviour
 
     public void Stop()
     {
-        CancelInvoke();
+        CancelInvoke("Spawn");
     }
     
     private void Spawn()
