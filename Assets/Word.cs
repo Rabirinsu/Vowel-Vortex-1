@@ -26,12 +26,19 @@ public class Word : ScriptableObject
 
     private void SetWrongLetters()
     {
-        wrongLetters = allletters.letters;
-        foreach (var letter in wrongLetters)
+      /*  foreach (var letter in allletters.letters)
         {
             if (missingLetters.Contains(letter))
             {
-                wrongLetters.Remove(letter);
+                //wrongLetters.Remove(letter);
+            }
+        }*/
+      wrongLetters = allletters.letters;
+        for (var i = 0; i < wrongLetters.Count; i++)
+        {
+            if (missingLetters.Contains(wrongLetters[i]))
+            {
+                wrongLetters.Remove(wrongLetters[i]);
             }
         }
     }
