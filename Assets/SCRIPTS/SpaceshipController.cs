@@ -17,17 +17,74 @@ public class SpaceshipController : MonoBehaviour
    [SerializeField] private float leftBound;
    [SerializeField] private float ceilBound;
    [SerializeField] private float floorBound;
+
+   [Header("CONTROL MOVEMENT")]
+   [SerializeField]  private float maxfallingSpeed;
+   [SerializeField] private float minfallSpeed;
+   [SerializeField] private float maxRotation;
+   [SerializeField] private float rotateSpeed;
+
+  
+   [SerializeField] private float boostleveltime_Count;
+   [SerializeField]  private float boostlevel1_Time;
+   [SerializeField] private float boostlevel2_Time;
+   [SerializeField] private float boostlevel3_Time;
+
+   [SerializeField]
+   private SpriteRenderer spriteRender;
+
+   [SerializeField] private Sprite defaultSprite;
+   [SerializeField] private Sprite level1sprite;
+   [SerializeField] private Sprite level2sprite;
+   [SerializeField] private Sprite level3sprite;
+     public enum rotatePhase{None,Left, Right}
+
+     public rotatePhase currentrotate;
+     private bool boostLevelActive;
    private void FixedUpdate()
     {
-            Fire();
         if(Input.anyKey)
         {
+            Rotate();
            Move();
+           Fire();
         }
         if (!IsFireReady())
             UpdateFireDelay();
-     
+        LimitVelocity();
+          CheckBoostLevel();
     }
+    
+   private void Rotate()
+   {
+   
+       if (Input.GetKey(KeyCode.LeftArrow))
+       {
+           transform.Rotate(Vector3.forward * rotateSpeed * Time.deltaTime);
+           currentrotate = rotatePhase.Left;
+       }
+    else if (Input.GetKey(KeyCode.RightArrow) )
+       {
+           transform.Rotate(Vector3.back * rotateSpeed * Time.deltaTime);
+           currentrotate = rotatePhase.Right;
+       }
+   }
+   
+   private void LimitVelocity()
+   {
+       if (rb.velocity.y < - maxfallingSpeed)
+       {
+           rb.velocity = new Vector2( rb.velocity.x, Mathf.Clamp( rb.velocity.y, minfallSpeed,maxfallingSpeed));
+       }
+   }
+
+   private void Update()
+   {
+       if ((Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.UpArrow)) && boostLevelActive)
+       {
+           boostLevelActive = false;
+       }
+   }
 
    private void LateUpdate()
    {
@@ -41,14 +98,55 @@ public class SpaceshipController : MonoBehaviour
    {
       return new Vector2(transform.position.x, transform.position.y);
    }
-   
-    private void Move()
+
+   private void CheckBoostLevel()
+   {
+       if(boostLevelActive && boostleveltime_Count < boostlevel3_Time)
+         boostleveltime_Count += Time.deltaTime;
+       else if (!boostLevelActive && boostleveltime_Count > 0)
+           boostleveltime_Count -= Time.deltaTime;
+       if ((!boostLevelActive && boostleveltime_Count <= boostlevel1_Time))
+           spriteRender.sprite = defaultSprite;
+       else if (boostLevelActive &&
+                (boostleveltime_Count >= boostlevel1_Time && boostleveltime_Count < boostlevel2_Time))
+       {
+           spriteRender.sprite = level1sprite;
+       }
+       else if (boostleveltime_Count >= boostlevel2_Time && boostleveltime_Count < boostlevel3_Time)
+       {
+           spriteRender.sprite = level2sprite;
+       }
+       else if (boostleveltime_Count >= boostlevel3_Time)
+       {
+           spriteRender.sprite = level3sprite;
+       }
+
+   }
+
+   private void Move()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) )
+        {
+            transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
+            boostLevelActive = true;
+          
+        }
+   
+
+       else if (Input.GetKey(KeyCode.A))
+        {
+            transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
+        }
+
+        else if (Input.GetKey(KeyCode.D))
+        {
+            transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+        }
+      /*  float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         
         var movement = new Vector2(horizontalInput, verticalInput) * moveSpeed * Time.deltaTime;
-        rb.MovePosition(rb.position + movement);
+        rb.MovePosition(rb.position + movement)*/
     }
     
     private void Fire()
@@ -57,8 +155,8 @@ public class SpaceshipController : MonoBehaviour
             {
                 if (IsFireReady())
                 {
-                    transform.rotation = SetTargetAngle();
-                    BulletPool.Instance.InstantiateBullet(targetAngle);
+                    //transform.rotation = SetTargetAngle();
+                    BulletPool.Instance.InstantiateBullet(transform.up);
                     currentfireDelay = fireDelay;
                 }
             }

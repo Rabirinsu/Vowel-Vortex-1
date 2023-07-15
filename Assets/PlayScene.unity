@@ -199,7 +199,7 @@ Rigidbody2D:
   m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 0.03
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -226,6 +226,20 @@ MonoBehaviour:
   leftBound: -8.4
   ceilBound: 0
   floorBound: -3.5
+  maxfallingSpeed: 1
+  minfallSpeed: 0.1
+  maxRotation: 90
+  rotateSpeed: 60
+  boostleveltime_Count: 0
+  boostlevel1_Time: 0.1
+  boostlevel2_Time: 3
+  boostlevel3_Time: 7
+  spriteRender: {fileID: 67979499}
+  defaultSprite: {fileID: 21300000, guid: a3b5a83070fe38c4e9f6e29c7a2352a3, type: 3}
+  level1sprite: {fileID: 21300000, guid: 2505f527eb21c0e43bd32283adde659c, type: 3}
+  level2sprite: {fileID: 21300000, guid: 9f1c3142aea88a94698adf89fbc53a1a, type: 3}
+  level3sprite: {fileID: 21300000, guid: 09699b0026cf3094cafe51f19c9e7b9c, type: 3}
+  currentrotate: 0
 --- !u!212 &67979499
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -266,13 +280,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 131579c6693e1ac468d49900f95b1d40, type: 3}
+  m_SortingOrder: 5
+  m_Sprite: {fileID: 21300000, guid: a3b5a83070fe38c4e9f6e29c7a2352a3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 4.99, y: 4.99}
+  m_Size: {x: 5, y: 5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -311,8 +325,8 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.99, y: 4.99}
-    newSize: {x: 4.99, y: 4.99}
+    oldSize: {x: 5, y: 5}
+    newSize: {x: 5, y: 5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
