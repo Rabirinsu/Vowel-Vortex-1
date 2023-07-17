@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
       [SerializeField] private TextMeshProUGUI scoreTmp;
       [SerializeField] private TextMeshProUGUI currentscoreTmp;
       [SerializeField] private TextMeshProUGUI bestscoreTmp;
+      [SerializeField] private TextMeshProUGUI currentlevelTmp;
       private float barcurrentFillamount;
       [Header("CORE")]
       [SerializeField] private Image succesBar;
@@ -66,12 +67,13 @@ public class UIManager : MonoBehaviour
           gamesuccessCanvas.SetActive(false);
           scoreTable.SetActive(false);
           barcurrentFillamount = 0f;
-          UpdateSuccesBar(0f,defaultColor);
+         // UpdateSuccesBar(0f,defaultColor);
           UpdateScore(0);
           foreach (var life in lifes)
           {
               life.interactable = true;
           }
+          currentlevelTmp.text = "1";
       }
      public void LevelUp()
       {
@@ -79,11 +81,14 @@ public class UIManager : MonoBehaviour
           gamesuccessCanvas.SetActive(false);
           scoreTable.SetActive(false);
           barcurrentFillamount = 0f;
-          UpdateSuccesBar(0f,defaultColor);
+        //  UpdateSuccesBar(0f,defaultColor);
+          
           foreach (var life in lifes)
           {
               life.interactable = true;
           }
+
+          currentlevelTmp.text = LevelManager.currentLevel.ID.ToString();
       }
 
       public void GameOver()
@@ -101,19 +106,19 @@ public class UIManager : MonoBehaviour
           if (scoreAmount > 0)
           {
               scoreTmp.DOColor(rightColor, uitweenDelay).OnComplete(() => { scoreTmp.color = defaultColor; });
-              UpdateSuccesBar(rightbarfillAmount, rightColor);
+            //  UpdateSuccesBar(rightbarfillAmount, rightColor);
           }
           else
           {
               scoreTmp.DOColor(wrongColor, uitweenDelay).OnComplete(() => { scoreTmp.color = defaultColor; });
-              UpdateSuccesBar(wrongbarfillAmount, wrongColor);
+             // UpdateSuccesBar(wrongbarfillAmount, wrongColor);
           }
               
       }
 
       private void UpdateSuccesBar(float fillAmount, Color color)
       {
-          barcurrentFillamount += fillAmount;
+          barcurrentFillamount = fillAmount;
           NormalizeBar();
           succesBar.DOFillAmount(barcurrentFillamount, uitweenDelay);
           succesBar.DOColor(color, uitweenDelay).OnComplete(() => { succesBar.color = defaultColor; });

@@ -10,10 +10,12 @@ public class GameManager : MonoBehaviour
 {
     [Header("CORE")]
     public static GameManager Instance;
-
-    public int currentScore;
-    public int bestScore;
+  [HideInInspector] public float lettersuccesfillAmount;
+  [HideInInspector]  public float levelsuccesFill;
+  [HideInInspector]  public int currentScore;
+  [HideInInspector]   public int bestScore;
     private float initializegameDelay;
+   [SerializeField] private List<Letter> missingLetters;
     [SerializeField] private GameData data;
     [FormerlySerializedAs("initializegame_event")]
     [Header("EVENTS")] 
@@ -21,6 +23,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameEvent startgameEvent;
     [SerializeField] private GameEvent restartgameEvent;
     [SerializeField] private GameEvent gameoverEvent;
+    [SerializeField] private GameEvent gamesuccesEvent;
     [Header("WORD & LETTER")] 
     public Word currentWord;
     public  Transform letterspawnPoint;
@@ -34,7 +37,7 @@ public class GameManager : MonoBehaviour
     public enum Phase { None, Initialize, Start,  Restart, Over, Pause}
 
     private Phase _phase;
-
+    
     public Phase currentPhase
     {
         get { return _phase;}
@@ -44,11 +47,6 @@ public class GameManager : MonoBehaviour
             UpdatePhase();
         }
     }
-    private void Awake()
-    {
-        Define();
-    }
-
     public void UpdateBestScore()
     {
         if (currentScore > data.bestScore)
@@ -56,6 +54,11 @@ public class GameManager : MonoBehaviour
             data.bestScore = currentScore;
             SetBesTScore();
         }
+    }
+
+    private void Awake()
+    {
+        Define();
     }
 
     public void SetBesTScore()
@@ -91,7 +94,7 @@ public class GameManager : MonoBehaviour
         
     }
 
-    private void Start()
+    public void LoadGame()
     {
         currentPhase = Phase.Initialize;
     }
@@ -138,6 +141,18 @@ public class GameManager : MonoBehaviour
     {
         SetWord();
         StartCoroutine(GameInitializer());
+        levelsuccesFill = 0;
+    }
+
+    public bool IsWordCorrected(Letter letter)
+    {
+        if (missingLetters.Contains(letter))
+        {
+          missingLetters.Remove(letter);
+        }
+        if (missingLetters.Count == 0)
+            return true;
+        return false;
     }
     
     private IEnumerator GameInitializer()
@@ -150,10 +165,14 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(initializegameDelay);
         currentPhase = Phase.Start;
     }
-    private void SetWord()
+    public void SetWord()
     {
          wordLetters = currentWord.GetWordLetters();
          currentWord.Initialize();
+         foreach (var letter in currentWord.missingLetters)
+         {
+             missingLetters.Add(letter);
+         }
     } 
 
     IEnumerator PlaceWord()

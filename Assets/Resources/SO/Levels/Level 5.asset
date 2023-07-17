@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c8cc4973272f4bbcdbb477bf5708f, type: 3}
+  m_Name: Level 5
+  m_EditorClassIdentifier: 
+  ID: 5
+  word: {fileID: 11400000, guid: b887b0eaa1349384eb9ac76f612ae75a, type: 2}
+  obstacles:
+  - {fileID: 11400000, guid: cbcd48aae760bee4e861dd2300290e7f, type: 2}
+  collectables:
+  - {fileID: 11400000, guid: 385bed16e6ab5e84c89a43e58c290fb4, type: 2}
+  minobstaclepawnDelay: 6
+  maxobstaclespawnDelay: 3
+  mincollectablespawnDelay: 3
+  maxcollectablespawnDelay: 7

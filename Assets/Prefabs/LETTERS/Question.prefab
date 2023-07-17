@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 877938341501961787}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 3.4, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -148,10 +148,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitmissinEvent: {fileID: 11400000, guid: c1f539d9999b77a4e912d14aa53c687e, type: 2}
   hitwrongEvent: {fileID: 11400000, guid: 594e4852edd8f5e498894140459d74b7, type: 2}
+  gamesuccesEvent: {fileID: 11400000, guid: 44fd42b7392923949a73ad0e6329b00d, type: 2}
   letter: {fileID: 11400000, guid: 0f167b19a9c9123409c35f9decbe5578, type: 2}
   rb: {fileID: 877938341501961791}
+  spriteRenderer: {fileID: 0}
   currentType: 0
   wrongScore: {fileID: 6990396402207886330, guid: 613040259d4518b40a25b3e29dc9b680, type: 3}
   rightScore: {fileID: 6990396402207886330, guid: 40fec0eb5481a6e48815c7169067813f, type: 3}
   col: {fileID: 877938341501961788}
   destroyDelay: 2
+  wrongFX: {fileID: 3728702094355809133, guid: d2659642a8a312f4987f2c6d9db58fed, type: 3}
+  rightFX: {fileID: 2143725565825922080, guid: e10e598cb24e13a4d807181cef2e3ee5, type: 3}

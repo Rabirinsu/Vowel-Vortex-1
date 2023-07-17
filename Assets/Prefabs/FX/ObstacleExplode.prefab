@@ -19086,7 +19086,7 @@ GameObject:
   - component: {fileID: 4094900335595247439}
   - component: {fileID: 8658859781777298035}
   m_Layer: 0
-  m_Name: CFXR Explosion 2 Bigger
+  m_Name: ObstacleExplode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

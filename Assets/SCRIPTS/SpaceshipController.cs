@@ -30,6 +30,8 @@ public class SpaceshipController : MonoBehaviour
    [SerializeField] private float boostlevel2_Time;
    [SerializeField] private float boostlevel3_Time;
 
+   [SerializeField] private Vector2 boostForce;
+   [Header("SPRITES")]
    [SerializeField]
    private SpriteRenderer spriteRender;
 
@@ -40,6 +42,8 @@ public class SpaceshipController : MonoBehaviour
      public enum rotatePhase{None,Left, Right}
 
      public rotatePhase currentrotate;
+     
+    
      private bool boostLevelActive;
    private void FixedUpdate()
     {
@@ -105,20 +109,29 @@ public class SpaceshipController : MonoBehaviour
          boostleveltime_Count += Time.deltaTime;
        else if (!boostLevelActive && boostleveltime_Count > 0)
            boostleveltime_Count -= Time.deltaTime;
-       if ((!boostLevelActive && boostleveltime_Count <= boostlevel1_Time))
+       if ((!boostLevelActive && boostleveltime_Count <= boostlevel1_Time) && spriteRender.sprite != defaultSprite)
+       {
            spriteRender.sprite = defaultSprite;
+           maxfallingSpeed = 1.5f;
+       }
        else if (boostLevelActive &&
-                (boostleveltime_Count >= boostlevel1_Time && boostleveltime_Count < boostlevel2_Time))
+                (boostleveltime_Count >= boostlevel1_Time && boostleveltime_Count < boostlevel2_Time) && spriteRender.sprite != level1sprite)
        {
+          rb.AddForce(boostForce, ForceMode2D.Impulse);
            spriteRender.sprite = level1sprite;
+           maxfallingSpeed = .7f;
        }
-       else if (boostleveltime_Count >= boostlevel2_Time && boostleveltime_Count < boostlevel3_Time)
+       else if (boostleveltime_Count >= boostlevel2_Time && boostleveltime_Count < boostlevel3_Time  && spriteRender.sprite != level2sprite)
        {
+          rb.AddForce(boostForce, ForceMode2D.Impulse);
            spriteRender.sprite = level2sprite;
+           maxfallingSpeed = .3f;
        }
-       else if (boostleveltime_Count >= boostlevel3_Time)
+       else if (boostleveltime_Count >= boostlevel3_Time  && spriteRender.sprite != level3sprite)
        {
+           rb.AddForce(boostForce, ForceMode2D.Impulse);
            spriteRender.sprite = level3sprite;
+           maxfallingSpeed = .1f;
        }
 
    }

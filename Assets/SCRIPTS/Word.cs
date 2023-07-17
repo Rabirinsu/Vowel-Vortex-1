@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -26,14 +27,8 @@ public class Word : ScriptableObject
 
     private void SetWrongLetters()
     {
-      /*  foreach (var letter in allletters.letters)
-        {
-            if (missingLetters.Contains(letter))
-            {
-                //wrongLetters.Remove(letter);
-            }
-        }*/
-      wrongLetters = allletters.letters;
+        GameManager.Instance.lettersuccesfillAmount =  1f / (missingLetters.Count);
+        wrongLetters = allletters.letters;
         for (var i = 0; i < wrongLetters.Count; i++)
         {
             if (missingLetters.Contains(wrongLetters[i]))
@@ -42,7 +37,7 @@ public class Word : ScriptableObject
             }
         }
     }
-
+   
     public List<Letter> GetWordLetters()
     {
         var letterlist = new List<Letter>();
@@ -51,6 +46,7 @@ public class Word : ScriptableObject
             if (isMissing(consistLetters[i]))
             {
                 letterlist.Add(questionLetter);
+                
             }
             else letterlist.Add(consistLetters[i]);
         }
@@ -58,6 +54,7 @@ public class Word : ScriptableObject
         return letterlist;
     }
 
+    
     public bool isMissing(Letter letter)
     {
         if (missingLetters.Contains(letter))

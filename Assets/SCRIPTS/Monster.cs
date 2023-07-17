@@ -14,13 +14,17 @@ using UnityEngine;
         [SerializeField] private Sprite headattackSprite;
         [SerializeField] private Sprite headidleSprite;
         [SerializeField] private SpriteRenderer spriteRenderer;
+        
+        
         public void ThrowLetter()
         {
-            var letter = Instantiate(SpawnManager.instance.nextLetter, weapon.position, Quaternion.identity);
-            letter.SendMessage("SetDynamic", SendMessageOptions.DontRequireReceiver);
-            
+            if (SpawnManager.instance.currentLetter)
+            {
+                var letter = Instantiate(SpawnManager.instance.currentLetter, weapon.position, Quaternion.identity);
+                letter.SendMessage("SetDynamic", SendMessageOptions.DontRequireReceiver);
+            }
         }
-
+        
         public void IdleAction()
         {
             spriteRenderer.sprite = headidleSprite;

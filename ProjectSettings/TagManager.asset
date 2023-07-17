@@ -8,6 +8,8 @@ TagManager:
   - Bullet
   - ScoreAnchor
   - Obstacle
+  - Collectable
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX

@@ -1,21 +1,25 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class SpawnManager : MonoBehaviour
 {
     public static SpawnManager instance;
     [SerializeField] private GameObject obstacle;
-    [SerializeField] private float obstaclespawnDelay;
+     private float obstaclespawnDelay;
+     [SerializeField] private float enableDelay;
     [SerializeField] private float spawnpointX;
     [SerializeField] private float spawnpointY;
     [SerializeField] private float minspawnDelay;     
     [SerializeField] private float maxspawnDelay;     
     [SerializeField] private Animator animator;
-    public GameObject nextLetter;
-    public void Start()
+    [FormerlySerializedAs("nextLetter")] public GameObject currentLetter;
+
+    private void Awake()
     {
         if (instance != null && instance != this)
         {
@@ -25,38 +29,65 @@ public class SpawnManager : MonoBehaviour
         {
             instance = this;
         }
-        InvokeRepeating("SpawnObstacles", 1, obstaclespawnDelay);
     }
+
+    public void OnEnable()
+    {
+        SetLetter();
+        StartCoroutine(EnableAction());
+    }
+
+    private IEnumerator EnableAction()
+    {
+        yield return new WaitForSeconds(enableDelay);
+        InvokeRepeating("SpawnObstacles", 1, LevelManager.currentLevel.GenerateObstacleSpawnDelay());
+        InvokeRepeating("SpawnCollectables", 1, LevelManager.currentLevel.GenerateCollectableSpawnDelay());
+        InvokeRepeating("Spawn", 1, GenerateLetterSpawnDelay());
+    }
+    private void OnDisable()
+    {
+        CancelInvoke();
+    }
+    public void Initialize()
+    {
+        this.enabled = true;
+    }
+    
+    public void Stop()
+    {
+        this.enabled = false;
+        currentLetter = null;
+    }
+  
 
     private void SpawnObstacles()
     {
+        obstacle = LevelManager.currentLevel.GetObstacle();
+        Instantiate(obstacle, new Vector2(Random.Range(-spawnpointX,spawnpointX), spawnpointY), quaternion.identity);
+    }  
+    private void SpawnCollectables()
+    {
+        obstacle = LevelManager.currentLevel.GetCollectable();
         Instantiate(obstacle, new Vector2(Random.Range(-spawnpointX,spawnpointX), spawnpointY), quaternion.identity);
     }
-    
-    private float GenerateRandomValue()
+
+
+    private float GenerateLetterSpawnDelay()
     {
         return Random.Range(minspawnDelay, maxspawnDelay);
     }
-
-    public void ThrowLetters()
+   
+    public void SetLetter()
     {
-        Stop();
-        nextLetter = GameManager.Instance.currentWord.GetLetter();
-        InvokeRepeating("Spawn", 1, GenerateRandomValue());
+        currentLetter = GameManager.Instance.currentWord.GetLetter();
     }
 
-    public void Stop()
+    public void Spawn()
     {
-        CancelInvoke("Spawn");
-    }
-    
-    private void Spawn()
-    {
-        if(nextLetter)
+        if(currentLetter)
         {
-            nextLetter = GameManager.Instance.currentWord.GetLetter();
-            nextLetter.SendMessage("SetDynamic", SendMessageOptions.DontRequireReceiver);
             animator.SetTrigger("Attack");
+            SetLetter();
         }
     }
 }

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2147665304968590315}
   - component: {fileID: 2571030204900057055}
   m_Layer: 0
-  m_Name: Obstacle
+  m_Name: Meteor
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6642e5ee4cd1827479e2685a2a998c05, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_Size: {x: 10, y: 10}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &1821327625886604377
@@ -136,8 +136,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6476fc4abf04b0b4b867e8077711b0ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 5
-  forcePower: {x: 0, y: -3}
-  rb: {fileID: 2147665304968590315}
-  playerdamageEvent: {fileID: 11400000, guid: be3d696ed25d1e0439dfce193791cf8a, type: 2}
+  obstacle: {fileID: 11400000, guid: 91fc459daf7cd62498592b9b944dfa34, type: 2}
+  sprite: {fileID: 0}
+  hardnesLevel: 0
   explodeFX: {fileID: 4094900335580444559, guid: 5135d2b86ec9bbb439c11c9935955851, type: 3}
+  rb: {fileID: 2147665304968590315}
+  spriteRenderer: {fileID: 404559956502496981}
+  playerdamageEvent: {fileID: 11400000, guid: be3d696ed25d1e0439dfce193791cf8a, type: 2}

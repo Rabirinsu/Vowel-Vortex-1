@@ -12,22 +12,29 @@ public class LetterDefinition : MonoBehaviour
     [Header("EVENTS")] 
     [SerializeField] private GameEvent hitmissinEvent;
     [SerializeField] private GameEvent hitwrongEvent;
+    [SerializeField] private GameEvent gamesuccesEvent;
     
     [Header("CORE")]
     [SerializeField] private Letter letter;
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     public enum Type{ None, wrong, missing}
 
     public Type currentType;
     [SerializeField] private GameObject wrongScore;
     [SerializeField] private GameObject rightScore;
-
-    [SerializeField]
-    private BoxCollider2D col;
-
+    [SerializeField]  private BoxCollider2D col;
     private float lifeTime = 15f;
-    [SerializeField]
-    private float destroyDelay;
+    [SerializeField]   private float destroyDelay;
+
+    [SerializeField] private GameObject wrongFX;
+    [SerializeField] private GameObject rightFX;
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
     private void Initialize()
     {
        var force = letter.GetSpawnForce();
@@ -38,13 +45,17 @@ public class LetterDefinition : MonoBehaviour
            // Go To Word .. Point
            currentType = Type.missing;
            col.isTrigger = false;
+           spriteRenderer.color = Color.green;
+         transform.GetChild(0).gameObject.SetActive(true);
            Destroy(this.gameObject, lifeTime);
        }
        else
        {
            // Go player to explode
            currentType = Type.wrong;    
+           spriteRenderer.color = Color.red;
            col.isTrigger = false;
+           transform.GetChild(1).gameObject.SetActive(true);
            Destroy(this.gameObject, lifeTime);
        }
     }
@@ -62,6 +73,8 @@ public class LetterDefinition : MonoBehaviour
                   break;
               case Type.missing:
                   Instantiate(rightScore,transform.position, quaternion.identity);
+                  if (GameManager.Instance.IsWordCorrected(letter))
+                      gamesuccesEvent?.Raise();
                   Destroy();
                   // ReSharper disable once Unity.NoNullPropagation
                   break;
