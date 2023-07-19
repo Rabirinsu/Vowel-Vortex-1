@@ -62,12 +62,12 @@ public class SpaceshipController : MonoBehaviour
    private void Rotate()
    {
    
-       if (Input.GetKey(KeyCode.LeftArrow))
+       if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
        {
            transform.Rotate(Vector3.forward * rotateSpeed * Time.deltaTime);
            currentrotate = rotatePhase.Left;
        }
-    else if (Input.GetKey(KeyCode.RightArrow) )
+    else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) )
        {
            transform.Rotate(Vector3.back * rotateSpeed * Time.deltaTime);
            currentrotate = rotatePhase.Right;
@@ -143,7 +143,7 @@ public class SpaceshipController : MonoBehaviour
         }
    
 
-       else if (Input.GetKey(KeyCode.A))
+     /*  else if (Input.GetKey(KeyCode.A))
         {
             transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
         }
@@ -151,7 +151,7 @@ public class SpaceshipController : MonoBehaviour
         else if (Input.GetKey(KeyCode.D))
         {
             transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
-        }
+        }*/
       /*  float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         

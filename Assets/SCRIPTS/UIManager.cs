@@ -16,7 +16,13 @@ public class UIManager : MonoBehaviour
       [SerializeField] private TextMeshProUGUI currentscoreTmp;
       [SerializeField] private TextMeshProUGUI bestscoreTmp;
       [SerializeField] private TextMeshProUGUI currentlevelTmp;
+      [SerializeField] private TextMeshProUGUI currentwordTMP;
       private float barcurrentFillamount;
+      [Header("LEVEL UP THINGS")]
+      [SerializeField] private GameObject logo;
+      [SerializeField] private GameObject monkey;
+      [SerializeField] private GameObject background;
+      [SerializeField] private GameObject hudcanvas;
       [Header("CORE")]
       [SerializeField] private Image succesBar;
       [SerializeField] private GameObject gameoverCanvas;
@@ -50,6 +56,14 @@ public class UIManager : MonoBehaviour
           Reset();
       }
 
+     private void UpdateLevelUPThings(bool isActive)
+     {
+         logo.SetActive(isActive);
+         monkey.SetActive(isActive);
+         background.SetActive(isActive);
+         hudcanvas.SetActive(isActive);
+     }
+      
       public void UpdateLifes()
       {
           for (var i = 0; i < lifes.Count; i++)
@@ -80,7 +94,7 @@ public class UIManager : MonoBehaviour
           GameManager.Instance.currentScore = 0;
           gameoverCanvas.SetActive(false);
           gamesuccessCanvas.SetActive(false);
-          scoreTable.SetActive(false);
+          scoreTable?.SetActive(false);
           barcurrentFillamount = 0f;
         //  UpdateSuccesBar(0f,defaultColor);
       
@@ -96,6 +110,7 @@ public class UIManager : MonoBehaviour
           gameoverCanvas.SetActive(false);
           gamesuccessCanvas.SetActive(true);
           scoreTable.SetActive(false);
+          currentwordTMP.text = GameManager.Instance.currentWord._name;
         //  UpdateSuccesBar(0f,defaultColor);
           
           foreach (var life in lifes)
@@ -108,7 +123,9 @@ public class UIManager : MonoBehaviour
 
      IEnumerator LevelUpRoutine()
      {
+         UpdateLevelUPThings(false);
          yield return new WaitForSeconds(3);
+         UpdateLevelUPThings(true);
          gamesuccessCanvas.SetActive(false);
      }
       public void GameOver()

@@ -6,6 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "WordGame/Word", fileName = "Word")]
 public class Word : ScriptableObject
 {
+    public string _name;
     public AllLeters allletters;
     public List<Letter> consistLetters;
     public List<Letter> missingLetters;

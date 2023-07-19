@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 962c39fb6131a9e43b385e8db1d1b463, type: 3}
   m_Name: MILK
   m_EditorClassIdentifier: 
+  _name: MILK
   allletters: {fileID: 11400000, guid: 7ebc1468dc1fc984ab2b4c88ec076230, type: 2}
   consistLetters:
   - {fileID: 11400000, guid: 4ab14289374286240be66d8e0d87fb65, type: 2}
@@ -36,7 +37,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 683e1509c23124b4ebb7c4fd747906d9, type: 2}
   - {fileID: 11400000, guid: 4ab14289374286240be66d8e0d87fb65, type: 2}
   - {fileID: 11400000, guid: 6afb3af6febc8b24d820dba5fac02712, type: 2}
-  - {fileID: 11400000, guid: a30b991eac22f604c8a4eaf0c50c62ab, type: 2}
   - {fileID: 11400000, guid: 7e7eda66c0bedf34ba09c04920948fcd, type: 2}
   - {fileID: 11400000, guid: 8c84e6e238b356546b9ecb6e100548cb, type: 2}
   - {fileID: 11400000, guid: 26f16586ad3c4d84eb620939dbf0e462, type: 2}
