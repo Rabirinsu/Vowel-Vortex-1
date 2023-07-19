@@ -50,7 +50,7 @@ public class SpaceshipController : MonoBehaviour
         if(Input.anyKey)
         {
             Rotate();
-           Move();
+             Move();
            Fire();
         }
         if (!IsFireReady())
@@ -92,10 +92,7 @@ public class SpaceshipController : MonoBehaviour
 
    private void LateUpdate()
    {
-       if(Input.anyKey)
-       {
            CheckPlayerBound();
-       }
    }
 
    private Vector2 NormalizePlayerPosition()

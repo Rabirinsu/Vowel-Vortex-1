@@ -101,6 +101,7 @@ public class GameManager : MonoBehaviour
 
     public void StopGame()
     {
+        
         Time.timeScale = 0;
         currentPhase = Phase.Over;
         UnplaceWord();
@@ -149,6 +150,8 @@ public class GameManager : MonoBehaviour
         if (missingLetters.Contains(letter))
         {
           missingLetters.Remove(letter);
+          if (missingLetters.Count == 0)
+              return true;
         }
         if (missingLetters.Count == 0)
             return true;
@@ -167,6 +170,7 @@ public class GameManager : MonoBehaviour
     }
     public void SetWord()
     {
+          missingLetters.Clear();
          wordLetters = currentWord.GetWordLetters();
          currentWord.Initialize();
          foreach (var letter in currentWord.missingLetters)

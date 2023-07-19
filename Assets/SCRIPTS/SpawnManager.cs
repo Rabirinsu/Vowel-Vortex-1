@@ -18,7 +18,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private float maxspawnDelay;     
     [SerializeField] private Animator animator;
     [FormerlySerializedAs("nextLetter")] public GameObject currentLetter;
-
+    [SerializeField] private float multiplewordspawnChance;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -42,8 +42,9 @@ public class SpawnManager : MonoBehaviour
         yield return new WaitForSeconds(enableDelay);
         InvokeRepeating("SpawnObstacles", 1, LevelManager.currentLevel.GenerateObstacleSpawnDelay());
         InvokeRepeating("SpawnCollectables", 1, LevelManager.currentLevel.GenerateCollectableSpawnDelay());
-        InvokeRepeating("Spawn", 1, GenerateLetterSpawnDelay());
+        InvokeRepeating("Spawn", GetSpawnRepeatTime(), GenerateLetterSpawnDelay());
     }
+    
     private void OnDisable()
     {
         CancelInvoke();
@@ -59,7 +60,7 @@ public class SpawnManager : MonoBehaviour
         currentLetter = null;
     }
   
-
+   
     private void SpawnObstacles()
     {
         obstacle = LevelManager.currentLevel.GetObstacle();
@@ -71,7 +72,15 @@ public class SpawnManager : MonoBehaviour
         Instantiate(obstacle, new Vector2(Random.Range(-spawnpointX,spawnpointX), spawnpointY), quaternion.identity);
     }
 
+    private int GetSpawnRepeatTime()
+    {
+        if (Random.value < multiplewordspawnChance)
+        {
+            return 2;
+        }
 
+        return 1;
+    }
     private float GenerateLetterSpawnDelay()
     {
         return Random.Range(minspawnDelay, maxspawnDelay);

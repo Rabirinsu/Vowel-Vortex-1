@@ -9,6 +9,7 @@ using UnityEngine.Serialization;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance;
     [Header("TEXT MESH")]
       [SerializeField] private TextMeshProUGUI scoreTmp;
       [SerializeField] private TextMeshProUGUI currentscoreTmp;
@@ -30,7 +31,20 @@ public class UIManager : MonoBehaviour
       [Header("EVENTS")]
      [SerializeField] private GameEvent gameoverEvent;
      [SerializeField] private GameEvent gamesuccessEvent;
-      private void OnEnable()
+
+     private void Awake()
+     {
+         if (Instance != null && Instance != this)
+         {
+             Destroy(this);
+         }
+         else
+         {
+             Instance = this;
+         }
+     }
+
+     private void OnEnable()
       {
           Reset();
       }
@@ -62,18 +76,18 @@ public class UIManager : MonoBehaviour
       }
       public void Reset()
       {
-          GameManager.Instance.currentScore = 0;
+        //  GameManager.Instance.currentScore = 0;
           gameoverCanvas.SetActive(false);
           gamesuccessCanvas.SetActive(false);
           scoreTable.SetActive(false);
           barcurrentFillamount = 0f;
-         // UpdateSuccesBar(0f,defaultColor);
-          UpdateScore(0);
+        //  UpdateSuccesBar(0f,defaultColor);
+      
           foreach (var life in lifes)
           {
               life.interactable = true;
           }
-          currentlevelTmp.text = "1";
+          currentlevelTmp.text = LevelManager.currentLevel.ID.ToString();
       }
      public void LevelUp()
       {
@@ -87,7 +101,6 @@ public class UIManager : MonoBehaviour
           {
               life.interactable = true;
           }
-
           currentlevelTmp.text = LevelManager.currentLevel.ID.ToString();
       }
 

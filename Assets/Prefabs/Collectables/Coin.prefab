@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fcb06afa717849f4291bef464dcf1d4b, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a09d3a6346ba465bacccfa26ac491a69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scorePrefab: {fileID: 6990396402207886330, guid: 16473a20f62297d41a9fe51addca3b7e, type: 3}
   collectable: {fileID: 11400000, guid: 385bed16e6ab5e84c89a43e58c290fb4, type: 2}
   rb: {fileID: 2147665304968590315}
   spriteRenderer: {fileID: 404559956502496981}

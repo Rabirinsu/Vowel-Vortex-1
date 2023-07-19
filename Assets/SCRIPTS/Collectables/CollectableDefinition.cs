@@ -5,8 +5,9 @@ namespace Collectables
 {
     public class CollectableDefinition : MonoBehaviour
     {
+        [SerializeField] private GameObject scorePrefab;
         [SerializeField] private Collectable collectable;
-        private float rewardAmount;
+        private int rewardAmount;
         private GameObject prefab;
         private GameObject collectedFX;
         private float lifeTime;
@@ -40,7 +41,8 @@ namespace Collectables
              if (other.gameObject.CompareTag("Bullet"))
             {
                 Instantiate(collectedFX, transform.position, Quaternion.identity);
-                collectedEvent?.Raise();
+               var scoreprefab=   Instantiate(scorePrefab,transform.position, Quaternion.identity);
+                 collectedEvent?.Raise();
                 Destroy(this.gameObject);
             }
         }

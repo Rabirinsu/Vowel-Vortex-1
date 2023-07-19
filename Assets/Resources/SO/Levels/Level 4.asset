@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level 4
   m_EditorClassIdentifier: 
   ID: 4
-  word: {fileID: 11400000, guid: b887b0eaa1349384eb9ac76f612ae75a, type: 2}
+  word: {fileID: 11400000, guid: 0efee262ac0ced047b551b7cbe920b91, type: 2}
   obstacles:
   - {fileID: 11400000, guid: cbcd48aae760bee4e861dd2300290e7f, type: 2}
   collectables:

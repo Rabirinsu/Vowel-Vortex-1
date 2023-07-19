@@ -6,7 +6,7 @@ namespace Collectables
      [CreateAssetMenu(menuName = "WordGame/Collectables/Coin", fileName = "Coin")]
      public class Collectable : ScriptableObject
      {
-          public float rewardAmount;
+          public int rewardAmount;
           public GameObject prefab;
           public GameObject collectedFX;
           public float lifeTime;

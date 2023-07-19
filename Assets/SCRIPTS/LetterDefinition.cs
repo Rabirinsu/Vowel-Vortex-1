@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -46,43 +47,50 @@ public class LetterDefinition : MonoBehaviour
            currentType = Type.missing;
            col.isTrigger = false;
            spriteRenderer.color = Color.green;
-         transform.GetChild(0).gameObject.SetActive(true);
+           transform.GetChild(0).gameObject.SetActive(true);
            Destroy(this.gameObject, lifeTime);
        }
        else
        {
            // Go player to explode
            currentType = Type.wrong;    
-           spriteRenderer.color = Color.red;
+           spriteRenderer.color = Color.green;
            col.isTrigger = false;
-           transform.GetChild(1).gameObject.SetActive(true);
+           transform.GetChild(0).gameObject.SetActive(true);
            Destroy(this.gameObject, lifeTime);
        }
     }
     
     public void GetHit()
-      {
-          switch(currentType)
-          {
-              case Type.None:
-                  break;
-              case Type.wrong:
-                  Instantiate(wrongScore,transform.position, quaternion.identity);
-                  Destroy();
-                  // ReSharper disable once Unity.NoNullPropagation
-                  break;
-              case Type.missing:
-                  Instantiate(rightScore,transform.position, quaternion.identity);
-                  if (GameManager.Instance.IsWordCorrected(letter))
-                      gamesuccesEvent?.Raise();
-                  Destroy();
-                  // ReSharper disable once Unity.NoNullPropagation
-                  break;
-              default:
-                  throw new ArgumentOutOfRangeException();
-          }
-      }
+    {
+        switch(currentType)
+        {
+            case Type.None:
+                break;
+            case Type.wrong:
+                Instantiate(wrongScore,transform.position, quaternion.identity);
+                Destroy();
+                // ReSharper disable once Unity.NoNullPropagation
+                break;
+            case Type.missing:
+                 Instantiate(rightScore,transform.position, quaternion.identity);
+                if (GameManager.Instance.IsWordCorrected(letter))
+                    gamesuccesEvent?.Raise();
+                Destroy();
+                // ReSharper disable once Unity.NoNullPropagation
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+       
+        
+    }
 
+    private IEnumerator CallEventRoutine()
+    {
+        yield return new WaitForSeconds(.7f);
+        
+    }
     private void Destroy()
     {
         rb.isKinematic = true;
