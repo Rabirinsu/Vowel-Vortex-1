@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GameData
   m_EditorClassIdentifier: 
   initializeDelay: 6
-  bestScore: 310
+  bestScore: 259
   currentlevelID: 1

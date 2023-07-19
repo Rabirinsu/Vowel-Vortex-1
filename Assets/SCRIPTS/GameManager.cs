@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameEvent restartgameEvent;
     [SerializeField] private GameEvent gameoverEvent;
     [SerializeField] private GameEvent gamesuccesEvent;
+    [SerializeField] private GameEvent gamelevelUp;
     [Header("WORD & LETTER")] 
     public Word currentWord;
     public  Transform letterspawnPoint;
@@ -101,7 +102,6 @@ public class GameManager : MonoBehaviour
 
     public void StopGame()
     {
-        
         Time.timeScale = 0;
         currentPhase = Phase.Over;
         UnplaceWord();
@@ -118,12 +118,24 @@ public class GameManager : MonoBehaviour
     }   
     public void LevelUp()
     {
+        currentPhase = Phase.Over;
         Time.timeScale = 1;
-        sentenceTMP.text = "";
-        placedWords.Clear();
-        currentPhase = Phase.Initialize;
+  
+        StartCoroutine(LevelUpRoutine());
     }
 
+    IEnumerator LevelUpRoutine()
+    {
+        yield return new WaitForSeconds(3);
+        UnplaceWord();
+        placedWords.Clear();
+        wordLetters.Clear();
+        sentenceTMP.text = "";
+        yield return new WaitForSeconds(2);
+        currentPhase = Phase.Initialize;
+        
+    }
+    
     private void Define()
     {
         if (Instance != null && Instance != this)
@@ -140,6 +152,7 @@ public class GameManager : MonoBehaviour
 
     public void InitializeGame()
     {
+        UnplaceWord();
         SetWord();
         StartCoroutine(GameInitializer());
         levelsuccesFill = 0;
@@ -160,7 +173,6 @@ public class GameManager : MonoBehaviour
     
     private IEnumerator GameInitializer()
     {
-        UnplaceWord();
         sentence = currentWord.sentence;
         wordplacePoint = wordplacementstartPoint.position;
         PlaceSentence();

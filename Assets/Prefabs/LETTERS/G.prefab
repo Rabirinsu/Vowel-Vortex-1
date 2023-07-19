@@ -151,6 +151,7 @@ MonoBehaviour:
   hitmissinEvent: {fileID: 11400000, guid: c1f539d9999b77a4e912d14aa53c687e, type: 2}
   hitwrongEvent: {fileID: 11400000, guid: 594e4852edd8f5e498894140459d74b7, type: 2}
   gamesuccesEvent: {fileID: 11400000, guid: 44fd42b7392923949a73ad0e6329b00d, type: 2}
+  gamelevelupEvent: {fileID: 11400000, guid: 32ebbfcb111a7b74fadb395dec8e82ae, type: 2}
   letter: {fileID: 11400000, guid: b423c1f4f0d29a24eb871a4981e7882a, type: 2}
   rb: {fileID: 877938341501961791}
   spriteRenderer: {fileID: 0}
@@ -178,7 +179,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2143725565825922081, guid: e10e598cb24e13a4d807181cef2e3ee5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.048
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2143725565825922081, guid: e10e598cb24e13a4d807181cef2e3ee5, type: 3}
       propertyPath: m_LocalPosition.y

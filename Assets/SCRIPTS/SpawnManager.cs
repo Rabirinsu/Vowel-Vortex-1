@@ -53,7 +53,19 @@ public class SpawnManager : MonoBehaviour
     {
         this.enabled = true;
     }
-    
+
+    public void Restart()
+    {
+        StartCoroutine(RestartRoutine());
+    }
+    private IEnumerator RestartRoutine()
+    {
+        CancelInvoke();
+        yield return new WaitForSeconds(5);
+        InvokeRepeating("SpawnObstacles", 1, LevelManager.currentLevel.GenerateObstacleSpawnDelay());
+        InvokeRepeating("SpawnCollectables", 1, LevelManager.currentLevel.GenerateCollectableSpawnDelay());
+        InvokeRepeating("Spawn", GetSpawnRepeatTime(), GenerateLetterSpawnDelay());
+    }
     public void Stop()
     {
         this.enabled = false;

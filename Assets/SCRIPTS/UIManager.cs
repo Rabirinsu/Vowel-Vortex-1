@@ -1,5 +1,6 @@
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -76,7 +77,7 @@ public class UIManager : MonoBehaviour
       }
       public void Reset()
       {
-        //  GameManager.Instance.currentScore = 0;
+          GameManager.Instance.currentScore = 0;
           gameoverCanvas.SetActive(false);
           gamesuccessCanvas.SetActive(false);
           scoreTable.SetActive(false);
@@ -87,14 +88,14 @@ public class UIManager : MonoBehaviour
           {
               life.interactable = true;
           }
+          UpdateScore(0);
           currentlevelTmp.text = LevelManager.currentLevel.ID.ToString();
       }
      public void LevelUp()
       {
           gameoverCanvas.SetActive(false);
-          gamesuccessCanvas.SetActive(false);
+          gamesuccessCanvas.SetActive(true);
           scoreTable.SetActive(false);
-          barcurrentFillamount = 0f;
         //  UpdateSuccesBar(0f,defaultColor);
           
           foreach (var life in lifes)
@@ -102,8 +103,14 @@ public class UIManager : MonoBehaviour
               life.interactable = true;
           }
           currentlevelTmp.text = LevelManager.currentLevel.ID.ToString();
+          StartCoroutine(LevelUpRoutine());
       }
 
+     IEnumerator LevelUpRoutine()
+     {
+         yield return new WaitForSeconds(3);
+         gamesuccessCanvas.SetActive(false);
+     }
       public void GameOver()
       {
           currentscoreTmp.text =  GameManager.Instance.currentScore.ToString();

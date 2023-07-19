@@ -14,6 +14,7 @@ public class LetterDefinition : MonoBehaviour
     [SerializeField] private GameEvent hitmissinEvent;
     [SerializeField] private GameEvent hitwrongEvent;
     [SerializeField] private GameEvent gamesuccesEvent;
+    [SerializeField] private GameEvent gamelevelupEvent;
     
     [Header("CORE")]
     [SerializeField] private Letter letter;
@@ -34,6 +35,12 @@ public class LetterDefinition : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void LateUpdate()
+    {
+        if(GameManager.Instance.currentPhase == GameManager.Phase.Over)
+            Destroy(this.gameObject);
     }
 
     private void Initialize()
@@ -75,7 +82,7 @@ public class LetterDefinition : MonoBehaviour
             case Type.missing:
                  Instantiate(rightScore,transform.position, quaternion.identity);
                 if (GameManager.Instance.IsWordCorrected(letter))
-                    gamesuccesEvent?.Raise();
+                    gamelevelupEvent?.Raise();
                 Destroy();
                 // ReSharper disable once Unity.NoNullPropagation
                 break;
